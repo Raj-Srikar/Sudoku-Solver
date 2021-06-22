@@ -2,13 +2,20 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox as mb
 from tkinter.filedialog import askopenfilename
-from sudokufuncs import solveSudoku, list_duplicates_of
+from SudokuFuncs import solveSudoku, list_duplicates_of
 import tkinter.font as font
 import time
 
 
 indexes = []
 def solve():
+    """
+    Will be called on clicking the 'SOLVE' Button.
+
+    Extracts all the digits given in the Sudoku Grid Entries and forms a 9x9 list. Then passes this list as
+    an argument while calling the "solveSudoku()" function. After solving, all the entries will be refilled
+    again with solved digits.
+    """
     try:
         st = time.time()
         rows_extracted = []
@@ -46,30 +53,26 @@ def solve():
         mb.showerror('Error', 'An Unknown error occurred!')
 
 
-def displaytime():
+def display_time():
+    """
+    Will be called on checking the 'Show Time' Checkbutton.
+
+    Enables and disables the "lbl_time" Label
+    """
     if time_var.get() == 0:
         lbl_time.grid_forget()
     if time_var.get() == 1:
         lbl_time.grid(row = 1, column = 0, sticky = 'nw', padx = 25, pady = 3)
 
 
-def highlight():
-    if indexes != []:
-        i=0
-        while i<9:
-            for j in indexes[i]:
-                if hlght_var.get() == 1:
-                    rows[i][j].config({"foreground": color_var.get().lower()})
-                elif hlght_var.get() == 0:
-                    rows[i][j].config({"foreground": "black"})
-            i+=1
-    if hlght_var.get() == 1:
-        cmb_color['state'] = 'readonly'
-    elif hlght_var.get() == 0:
-        cmb_color['state'] = 'disabled'
+def highlight(e=0):
+    """
+    Will be called on checking the 'Highlight Solved Digits' Checkbutton and on selecting an option in the
+    Color Combobox
 
-
-def cmb_highlight(e):
+    Highlights all the solved digits in the Sudoku, by changing their color to the selected color in the
+    Color Combobox
+    """
     if indexes != []:
         i=0
         while i<9:
@@ -87,6 +90,11 @@ def cmb_highlight(e):
 
 
 def goto_next_entry():
+    """
+    Called in the KeyPress() function
+
+    Selects the next Entry on pressing the Right Arrow Key
+    """
     focused_entry = window.focus_get()
     ind = all_entries.index(focused_entry)
     if ind != len(all_entries)-1:
@@ -94,6 +102,11 @@ def goto_next_entry():
         all_entries[ind].focus()
 
 def goto_prev_entry():
+    """
+    Called in the KeyPress() function
+
+    Selects the previous Entry on pressing the Left Arrow Key
+    """
     focused_entry = window.focus_get()
     ind = all_entries.index(focused_entry)
     if ind != 0:
@@ -101,6 +114,11 @@ def goto_prev_entry():
         all_entries[ind].focus()
 
 def goto_top_entry():
+    """
+    Called in the KeyPress() function
+
+    Selects the upper Entry on pressing the Up Arrow Key
+    """
     focused_entry = window.focus_get()
     ind = all_entries.index(focused_entry)
     if ind > 8:
@@ -108,6 +126,11 @@ def goto_top_entry():
         all_entries[ind].focus()
 
 def goto_bottom_entry():
+    """
+    Called in the KeyPress() function
+
+    Selects the Entry below on pressing the Down Arrow Key
+    """
     focused_entry = window.focus_get()
     ind = all_entries.index(focused_entry)
     if ind < 71:
@@ -116,6 +139,12 @@ def goto_bottom_entry():
 
 
 def keyPress(event):
+    """
+    Bounded to all the Entries in the Sudoku Grid
+
+    Detects the keyPress events while any of the Entries is selected. Allows characters only if it is a
+    number or '-' or a space. Also used to navigate through the Entries by detecting the arrow key events
+    """
     if event.char in ('1', '2', '3', '4', '5', '6', '7', '8', '9', '-') :
         focused = frm_sudoku.focus_get()
         focused.delete(0,tk.END)
@@ -140,6 +169,12 @@ def keyPress(event):
 
 
 def from_file():
+    """
+    Will be called on clicking the 'From File' Button.
+
+    Invokes askopenfilename dialog and imports the Sudoku from the selected text file and fills up all
+    the Entries.
+    """
     chk_highlight.deselect()
     chk_time.deselect()
     lbl_time.grid_forget()
@@ -167,6 +202,11 @@ def from_file():
 
 
 def clear():
+    """
+    Will be called on clicking the 'Clear' Button.
+
+    Clears all the Sudoku Grid Entries
+    """
     indexes.clear()
     lbl_time.config(text = '')
     i = 0
@@ -302,7 +342,7 @@ chk_time = tk.Checkbutton(frm_solve,                                            
                           offvalue = 0,
                           bg = '#15a6d6',
                           activebackground= '#15a6d6',
-                          command = displaytime
+                          command = display_time
                           )
 
 hlght_var = tk.IntVar()
@@ -329,7 +369,7 @@ cmb_color['values'] = ('Red',
                        'Purple',
                         )
 cmb_color.current(0)
-cmb_color.bind('<<ComboboxSelected>>', cmb_highlight)
+cmb_color.bind('<<ComboboxSelected>>', highlight)
 
 lbl_creds = tk.Label(window,                        # Credit Label
                      text = 'By - Raj Srikar',
