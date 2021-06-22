@@ -4,7 +4,6 @@ from tkinter import messagebox as mb
 from tkinter.filedialog import askopenfilename
 from SudokuFuncs import solveSudoku, list_duplicates_of
 import tkinter.font as font
-import time
 
 
 indexes = []
@@ -17,7 +16,6 @@ def solve():
     again with solved digits.
     """
     try:
-        st = time.time()
         rows_extracted = []
         count = 0
         for row in rows:
@@ -35,7 +33,7 @@ def solve():
             return
         for i in rows_extracted:
             indexes.append(list_duplicates_of(i,'-'))
-        solved = solveSudoku(matrix=rows_extracted)
+        solved = solveSudoku(showTime = True, matrix=rows_extracted)
         i=0
         while i<9:
             j=0
@@ -47,7 +45,7 @@ def solve():
                         rows[i][j].config({"foreground": "red"})
                 j+=1
             i+=1
-        time_taken = 'Time Taken: '+str(round(time.time()-st, 2))+'s'
+        time_taken = solved[-1]
         lbl_time['text'] = time_taken
     except:
         mb.showerror('Error', 'An Unknown error occurred!')

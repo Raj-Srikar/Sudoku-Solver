@@ -64,12 +64,12 @@ def solveSudoku(fileName = "", showResults = False, showTime = False, matrix = [
     returns: If 'showResults' parameter is given true, it returns the 9x9 solved sudoku list
              Else simply prints the solution
     """
-    st = time.time()
     if fileName == "" and matrix == []: rows = prompt_sudoku()
     elif fileName != "" and matrix == []: rows = get_sudoku(fileName)
     elif fileName == "" and matrix != []: rows = matrix
     elif fileName != "" and matrix !=[]:  raise ValueError("Please give any of the arguments, 'fileName' or 'matrix' (Both are given)")
 
+    st = time.time()
     all_combo = []
     vert = vertical(rows)
     blocks = blockify(rows)
@@ -97,12 +97,13 @@ def solveSudoku(fileName = "", showResults = False, showTime = False, matrix = [
                                         try_sol = []
                                         try_sol = [r1,r2,r3,r4,r5,r6,r7,r8,r9]
                                         if vertically_has_duplicates(r1,r2,r3,r4,r5,r6,r7,r8,r9) or blocks_has_duplicates(try_sol): continue
+                                        time_taken = 'Time Taken:  '+str(round(time.time()-st, 4))+'s'
                                         if showResults:
                                             for row in try_sol:
                                                 print(row)
-                                            if showTime: print('time taken: ', time.time()-st)
+                                            if showTime: print(time_taken)
                                         else:
-                                            if showTime: try_sol.append('time taken:  '+str(time.time()-st))
+                                            if showTime: try_sol.append(time_taken)
                                             return try_sol
 
 
