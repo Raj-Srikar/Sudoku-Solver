@@ -1,7 +1,9 @@
-#SudokuFuncs.py
+# SudokuFuncs.py
+
 Contains all the necessary functions required to solve Sudoku.
 
-###Functions
+## Functions
+
 **all_combinations(li)**
     Intitializes the 'combo_recursion' function, which will append the final list to the list, 'return_list'
 
@@ -11,7 +13,7 @@ Contains all the necessary functions required to solve Sudoku.
     returns: list, 'return_list' which contains lists of all the possible combinations of 'li' list
 
 **block_number(row, column)**
-    Detemines the block number in which the given row and column numbers intersects in sudoku
+    Determines the block number in which the given row and column numbers intersects in sudoku
 
     args:
     -rows - Row number
@@ -43,7 +45,7 @@ Contains all the necessary functions required to solve Sudoku.
     -li1 - list, that decays
     -li2 - list, that grows
 
-    returns: Nothing, but appends the resultant list to the globally decalred list, 'return_list'
+    returns: Nothing, but appends the resultant list to the globally declared list, 'return_list'
 
 **get_sudoku(filename)**
     Extracts sudoku from a file
@@ -71,7 +73,7 @@ Contains all the necessary functions required to solve Sudoku.
     -li1 - 1st list
     -li2 - 2nd list
 
-    returns: resulting list after subraction
+    returns: resulting list after subtraction
 
 **list_duplicates_of(seq, item)**
     Predicts the indexes of duplicate elements inside a list

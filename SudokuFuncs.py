@@ -185,7 +185,7 @@ def list_difference(li1, li2):
     -li1 - 1st list
     -li2 - 2nd list
 
-    returns: resulting list after subraction
+    returns: resulting list after subtraction
     """
     li_dif = [i for i in li1 + li2 if i not in li1 or i not in li2]
     return li_dif
@@ -217,7 +217,7 @@ def combo_recursion(li1, li2):
     -li1 - list, that decays
     -li2 - list, that grows
 
-    returns: Nothing, but appends the resultant list to the globally decalred list, 'return_list'
+    returns: Nothing, but appends the resultant list to the globally declared list, 'return_list'
     """
     if len(li1) != 1:
         for i in li1:
@@ -249,7 +249,7 @@ def all_combinations(li):
 
 def block_number(row, column):
     """
-    Detemines the block number in which the given row and column numbers intersects in sudoku
+    Determines the block number in which the given row and column numbers intersects in sudoku
 
     args:
     -rows - Row number
