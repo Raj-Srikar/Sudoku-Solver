@@ -1,6 +1,14 @@
-# Sudoku-Solver
+# Sudoku Solver with GUI Appication
 
-Solves Sudoku within seconds. The Sudoku can be given manually in the output screen or from a file. Also implemented as a GUI Application using Tkinter.
+Solves Sudoku within seconds. The Sudoku can be given manually in the output screen or from a file.
+<p align = "center">
+        <img src = "https://user-images.githubusercontent.com/65415209/123138653-e8adda00-d472-11eb-818d-3f35b85c91c5.png" width = 75% height = 75%>
+</p>
+Also implemented as a GUI Application using Tkinter.
+<p align = "center">
+        <br>
+        <img src = "https://user-images.githubusercontent.com/65415209/123136633-c74bee80-d470-11eb-9b83-fc91200888f3.png" width = 50% height = 50%>
+</p>
 
 ## Input Format
 
