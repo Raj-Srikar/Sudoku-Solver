@@ -1,6 +1,6 @@
 # Sudoku-Solver
 
-Solves Sudoku within seconds. The Sudoku can be given manually in the output screen or from a file.
+Solves Sudoku within seconds. The Sudoku can be given manually in the output screen or from a file. Also implemented as a GUI Application using Tkinter.
 
 ## Input Format
 

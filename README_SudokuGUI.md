@@ -5,10 +5,21 @@ GUI Implementation of the **Sudoku-Solver**.
 ## Features of the Application
 
 - Can import Sudoku from a text file.
-- Shows the time taken to solve.
-- Highlight the solved digits
-- Change the highlight color
-- Clear the Sudoku Grid
+- Show the time taken to solve.
+- Highlight the solved digits.
+- Change the highlight color.
+- Clear the Sudoku Grid at once.
+
+## Usage of the Application
+
+- Blank sudoku cells can be given as '-' or can be left blank.
+- Must provide Sudoku with atleast 25 digits.
+- 'Clear' button will clear all the Sudoku Cells.
+- 'From File' button is used to import a Sudoku from a text file.
+- 'Show Time Taken' check button will show the time taken to solve the given sudoku, if enabled.
+- 'Highlight Solved Digits' check button will highlight all the solved digits in Red color by default.
+- The color combo box is used to change the highlight color according to our convenience. It contains 'Red', 'Blue', 'Green', 'Orange', 'Purple' colors.
+- The 'SOLVE' button will solve the given Sudoku, if it's valid. It almost solves within 10 seconds. (All the experimental test cases took within 7 seconds and never exceeded 10 seconds mark. So I can't say for sure ;)
 
 ## Functions in the Code
 
