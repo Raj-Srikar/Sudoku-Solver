@@ -21,6 +21,10 @@ GUI Implementation of the **Sudoku-Solver**.
 - The color combo box is used to change the highlight color according to our convenience. It contains 'Red', 'Blue', 'Green', 'Orange', 'Purple' colors.
 - The 'SOLVE' button will solve the given Sudoku, if it's valid. It almost solves within 10 seconds. (All the experimental test cases took within 7 seconds and never exceeded 10 seconds mark. So I can't say for sure ;)
 
+# Executable File
+
+Run SudokuGUI.exe in your PC.
+
 ## Functions in the Code
 
 **clear()**
