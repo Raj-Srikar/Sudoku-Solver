@@ -11,8 +11,7 @@ Blank cells should be given as '-' and the number of characters should be 9. Pre
 The format of the text file should be as that of sample.txt
 
 Example:
-
-        15-8--7-2
+        `15-8--7-2
         -3--5----
         --72--5--
         -----1-9-
@@ -20,7 +19,7 @@ Example:
         9-----18-
         36---2--4
         --4-6-9--
-        -9-----61
+        -9-----61`
 
 ## README for Scripts
 
