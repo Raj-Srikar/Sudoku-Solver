@@ -6,9 +6,9 @@ def main():
     inputType = input()
 
     print('Choose an option:')
-    print('1. Print the output\n2. Assign to a variable')
+    print('1. Print the solution\n2. Assign solution to a variable')
     outputType = input()
-    
+
     print('Show time taken (y/n)')
     time = input()
     if time == 'y': showTime = True
