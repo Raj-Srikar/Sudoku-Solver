@@ -1,4 +1,4 @@
-# Sudoku Solver with GUI Appication
+# Sudoku Solver with GUI Application
 
 Solves Sudoku within seconds. The Sudoku can be given manually in the output screen or from a file.
 <p align = "center">
