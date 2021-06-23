@@ -12,7 +12,9 @@ Also implemented as a GUI Application using Tkinter.
 
 ## Input Format
 
-Blank cells should be given as '-' and the number of characters should be 9. Press Enter after giving 9 characters, to enter the next row in Sudoku. If 9 characters are not given or the given characters are not unique, a warning will be given to re-enter the row.  
+Blank cells should be given as '-' and the number of characters should be 9. Press Enter after giving 9 characters, to enter the next row in Sudoku. If 9 characters are not given or the given characters are not unique, a warning will be given to re-enter the row.
+
+For GUI Application, refer [Usage of the Application](https://github.com/Raj-Srikar/Sudoku-Solver/blob/main/README_SudokuGUI.md#usage-of-the-application)
 
 ## Text File Format
 
