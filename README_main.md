@@ -1,6 +1,6 @@
 # main.py
 
-Demonstrates different ways to use the solveSudoku() function.
+Demonstrates different ways to use the [solveSudoku()](https://github.com/Raj-Srikar/Sudoku-Solver/wiki/SudokuFuncs#solvesudokufilename-showresultsfalse-showtimefalse-matrix) function.
 
 ## Modes
 
