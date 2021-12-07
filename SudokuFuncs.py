@@ -1,4 +1,5 @@
 import time
+import itertools
 
 nums= ['1','2','3','4','5','6','7','8','9']     #Global declaration for numbers in sudoku
 
@@ -188,51 +189,16 @@ def list_difference(li1, li2):
 
     returns: resulting list after subtraction
     """
-    li_dif = [i for i in li1 + li2 if i not in li1 or i not in li2]
+    li_dif = [i for i in li1 + li2 if i in li1 and i not in li2]
     return li_dif
-
-
-def list_intersection(li1, li2):
-    """
-    Intersection between two lists
-
-    args:
-    -li1 - 1st list
-    -li2 - 2nd list
-
-    returns: resulting list after the intersection
-    """
-    inter = [value for value in li2 if value in li1]
-    return inter
 
 
 return_list = []        #Global declaration of the List to be returned after all the combinations are appended to it
 
 
-def combo_recursion(li1, li2):
-    """
-    Recursion function used to calculate all the combinations of a list
-    (incomplete function, continued in 'all_combinations' function)
-
-    args:
-    -li1 - list, that decays
-    -li2 - list, that grows
-
-    returns: Nothing, but appends the resultant list to the globally declared list, 'return_list'
-    """
-    if len(li1) != 1:
-        for i in li1:
-            dup1 = li1.copy()
-            dup2 = li2.copy()
-            dup2.append(dup1.pop(dup1.index(i)))
-            combo_recursion(dup1,dup2)
-    else:
-        return_list.append(li2+li1)
-
-
 def all_combinations(li):
     """
-    Intitializes the 'combo_recursion' function, which will append the final list to the list, 'return_list'
+    This will append all combination lists to the list, 'return_list'
 
     args:
     -li - list, of which the combinations will be determined
@@ -240,11 +206,9 @@ def all_combinations(li):
     returns: list, 'return_list' which contains lists of all the possible combinations of 'li' list
     """
     return_list.clear()
-    for i in li:
-        dup = li.copy()
-        ele = []
-        ele.append(dup.pop(dup.index(i)))
-        combo_recursion(dup,ele)
+    combination_in_tuple = list(itertools.permutations(li))
+    for i in combination_in_tuple:
+        return_list.append(list(i))
     return return_list
 
 
@@ -311,8 +275,7 @@ def insert_combos(lst, vertical_sudoku, blockified_sudoku, row_index):
              (where n is the number of tried combinations)
     """
     rows_combo = []
-    present = list_intersection(nums, lst)
-    missing = list_difference(nums, present)
+    missing = list_difference(nums, lst)
     indexes = list_duplicates_of(lst,'-')
     if len(missing) != 1:
         missing_combo = all_combinations(missing)
