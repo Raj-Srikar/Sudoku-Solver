@@ -1,5 +1,5 @@
 import time
-import itertools
+from itertools import permutations
 
 nums= ['1','2','3','4','5','6','7','8','9']     #Global declaration for numbers in sudoku
 
@@ -52,9 +52,9 @@ def prompt_sudoku():
 
 def solveSudoku(fileName = "", showResults = False, showTime = False, matrix = []):
     """
-    Solves a Sudoku by prompting about sudoku or reading a text file containing the sudoku or by directly
-    taking the matrix as variable and either shows the solution or returns it. Can also tell the execution time
-    (Any one of the arguments 'fileName' and 'matrix' should be given. Else rises ValueError)
+    Solves a Sudoku by prompting the sudoku or reading a text file containing the sudoku or by directly
+    taking the matrix as a variable and either shows the solution or returns it. Can also tell the execution time
+    (Any one of the arguments 'fileName' or 'matrix' should be given. Else rises ValueError)
 
     args:
     -fileName - Name of the text file in which sudoku is present (optional)
@@ -186,11 +186,9 @@ def list_difference(li1, li2):
 
     returns: resulting list after subtraction
     """
-    li_dif = [i for i in li1 + li2 if i in li1 and i not in li2]
-    return li_dif
+    return [i for i in li1 + li2 if i in li1 and i not in li2]
 
 
-return_list = []        #Global declaration of the List to be returned after all the combinations are appended to it
 
 
 def all_combinations(li):
@@ -202,11 +200,7 @@ def all_combinations(li):
 
     returns: list, 'return_list' which contains lists of all the possible combinations of 'li' list
     """
-    return_list.clear()
-    combination_in_tuple = list(itertools.permutations(li))
-    for i in combination_in_tuple:
-        return_list.append(list(i))
-    return return_list
+    return list(map(lambda x: list(x), permutations(li)))
 
 
 def block_number(row, column):
