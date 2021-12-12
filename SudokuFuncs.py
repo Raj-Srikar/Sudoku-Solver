@@ -1,4 +1,5 @@
 import time
+from itertools import permutations
 
 nums= ['1','2','3','4','5','6','7','8','9']     #Global declaration for numbers in sudoku
 
@@ -51,9 +52,9 @@ def prompt_sudoku():
 
 def solveSudoku(fileName = "", showResults = False, showTime = False, matrix = []):
     """
-    Solves a Sudoku by prompting about sudoku or reading a text file containing the sudoku or by directly
-    taking the matrix as an and either shows the solution or returns it. Can also tell the execution time
-    (Any one of the arguments 'fileName' and 'matrix' should be given. Else rises ValueError)
+    Solves a Sudoku by prompting the sudoku or reading a text file containing the sudoku or by directly
+    taking the matrix as a variable and either shows the solution or returns it. Can also tell the execution time
+    (Any one of the arguments 'fileName' or 'matrix' should be given. Else rises ValueError)
 
     args:
     -fileName - Name of the text file in which sudoku is present (optional)
@@ -69,7 +70,7 @@ def solveSudoku(fileName = "", showResults = False, showTime = False, matrix = [
     elif fileName == "" and matrix != []: rows = matrix
     elif fileName != "" and matrix !=[]:  raise ValueError("Please give any of the arguments, 'fileName' or 'matrix' (Both are given)")
 
-    st = time.time()
+    st = time.perf_counter()
     all_combo = []
     vert = vertical(rows)
     blocks = blockify(rows)
@@ -88,16 +89,15 @@ def solveSudoku(fileName = "", showResults = False, showTime = False, matrix = [
                     for r5 in a[4]:
                         if vertically_has_duplicates(r1,r2,r3,r4,r5): continue
                         for r6 in a[5]:
-                            if vertically_has_duplicates(r1,r2,r3,r4,r5,r6) or blocks_has_duplicates([r1,r2,r3,r4,r5,r6]): continue
+                            if vertically_has_duplicates(r1,r2,r3,r4,r5,r6) or blocks_has_duplicates([r4,r5,r6]): continue
                             for r7 in a[6]:
                                 if vertically_has_duplicates(r1,r2,r3,r4,r5,r6,r7): continue
                                 for r8 in a[7]:
                                     if vertically_has_duplicates(r1,r2,r3,r4,r5,r6,r7,r8): continue
                                     for r9 in a[8]:
-                                        try_sol = []
                                         try_sol = [r1,r2,r3,r4,r5,r6,r7,r8,r9]
-                                        if vertically_has_duplicates(r1,r2,r3,r4,r5,r6,r7,r8,r9) or blocks_has_duplicates(try_sol): continue
-                                        time_taken = 'Time Taken:  '+str(round(time.time()-st, 4))+'s'
+                                        if vertically_has_duplicates(r1,r2,r3,r4,r5,r6,r7,r8,r9) or blocks_has_duplicates([r7,r8,r9]): continue
+                                        time_taken = 'Time Taken:  '+str(round(time.perf_counter()-st, 4))+'s'
                                         if showResults:
                                             for row in try_sol:
                                                 print(row)
@@ -116,16 +116,15 @@ def blocks_has_duplicates(sudoku):
 
     returns: False if the given blocks have unique values. Else returns True
     """
-    is_correct = True
+    is_unique = True
     blocks = blockify(sudoku)
     for i in blocks:
-        if is_correct:
+        if is_unique:
             i.sort()
             is_unique = i==nums
-            is_correct = is_correct and is_unique
         else:
             break
-    return not is_correct
+    return not is_unique
 
 
 def blockify(sudoku):
@@ -169,10 +168,9 @@ def vertically_has_duplicates(*lists):
     """
     rows = list(lists)
     vert = vertical(rows)
-    is_not_equal = True
     for i in vert:
         set_row = set(i)
-        is_not_equal = is_not_equal and (len(set_row) == len(i))
+        is_not_equal = len(set_row)==len(i)
         if not is_not_equal:
             break
     return not is_not_equal
@@ -188,64 +186,21 @@ def list_difference(li1, li2):
 
     returns: resulting list after subtraction
     """
-    li_dif = [i for i in li1 + li2 if i not in li1 or i not in li2]
-    return li_dif
+    return [i for i in li1 + li2 if i in li1 and i not in li2]
 
 
-def list_intersection(li1, li2):
-    """
-    Intersection between two lists
-
-    args:
-    -li1 - 1st list
-    -li2 - 2nd list
-
-    returns: resulting list after the intersection
-    """
-    inter = [value for value in li2 if value in li1]
-    return inter
-
-
-return_list = []        #Global declaration of the List to be returned after all the combinations are appended to it
-
-
-def combo_recursion(li1, li2):
-    """
-    Recursion function used to calculate all the combinations of a list
-    (incomplete function, continued in 'all_combinations' function)
-
-    args:
-    -li1 - list, that decays
-    -li2 - list, that grows
-
-    returns: Nothing, but appends the resultant list to the globally declared list, 'return_list'
-    """
-    if len(li1) != 1:
-        for i in li1:
-            dup1 = li1.copy()
-            dup2 = li2.copy()
-            dup2.append(dup1.pop(dup1.index(i)))
-            combo_recursion(dup1,dup2)
-    else:
-        return_list.append(li2+li1)
 
 
 def all_combinations(li):
     """
-    Intitializes the 'combo_recursion' function, which will append the final list to the list, 'return_list'
+    This will return a list containing all combination lists
 
     args:
     -li - list, of which the combinations will be determined
 
-    returns: list, 'return_list' which contains lists of all the possible combinations of 'li' list
+    returns: a list, which contains lists of all the possible combinations of 'li' list
     """
-    return_list.clear()
-    for i in li:
-        dup = li.copy()
-        ele = []
-        ele.append(dup.pop(dup.index(i)))
-        combo_recursion(dup,ele)
-    return return_list
+    return list(map(lambda x: list(x), permutations(li)))
 
 
 def block_number(row, column):
@@ -311,8 +266,7 @@ def insert_combos(lst, vertical_sudoku, blockified_sudoku, row_index):
              (where n is the number of tried combinations)
     """
     rows_combo = []
-    present = list_intersection(nums, lst)
-    missing = list_difference(nums, present)
+    missing = list_difference(nums, lst)
     indexes = list_duplicates_of(lst,'-')
     if len(missing) != 1:
         missing_combo = all_combinations(missing)
