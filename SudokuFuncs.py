@@ -193,12 +193,12 @@ def list_difference(li1, li2):
 
 def all_combinations(li):
     """
-    This will append all combination lists to the list, 'return_list'
+    This will return a list containing all combination lists
 
     args:
     -li - list, of which the combinations will be determined
 
-    returns: list, 'return_list' which contains lists of all the possible combinations of 'li' list
+    returns: a list, which contains lists of all the possible combinations of 'li' list
     """
     return list(map(lambda x: list(x), permutations(li)))
 
